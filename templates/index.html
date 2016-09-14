@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" class="wholeBody">
+<head>
+	<meta charset="UTF-8">
+	<title>达州市中级人民法院</title>
+	<link rel="stylesheet" type="text/css" href="/static/index/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="/static/index/css/index.css">
+	<!--[if lt IE 9]>
+		/*兼容ie678*/
+		<style type="text/css"> 
+			.tip,.courtBuild h2,.courtBuild p{display:none;}
+			.wholeBody{height:auto;}
+		</style> 
+	<![endif]-->
+</head>
+<body class="wholeBody">
+	<div class="header">
+		<div class="mainBox clearfix">
+			<h1 class="logo">
+				<a href="javascript:;" title="达州市中级人民法院">
+					<img src="/static/index/images/logo.png" alt="达州市中级人民法院">
+				</a>
+			</h1>
+			<div class="otherNav clearfix">
+				<p class="weibo"><a href="http://weibo.com/u/3482626037?refer_flag=1001030101_&is_hot=1" target="_blank"></a></p>
+				<p class="wecat"><a href="javascript:;"></a></p>
+				<p class="service"><a href="javascript:;">网上诉讼<br>服务中心</a></p>
+			</div>
+		</div>
+	</div>
+
+	<div class="mainBox navModule clearfix">
+		<div class="courtBuild">
+			<figure class="effect-bubba">
+				<img src="/static/index/images/courtBuild.jpg" alt="">
+				<figcaption>
+					<h2><span>达州市中级人民法院</span></h2>
+					<p>DAZHOU Intermediate People's Courts</p>
+				</figcaption>			
+			</figure>
+		</div>
+		<div class="navModuleWarp">
+			<div class="navModuleWarp-1 clearfix">
+				<div class="navItem navItem1">
+					<a href="/cplc/index.html">
+						<img src="/static/index/images/navItem1.png" alt="">
+						<p>审判流程公开平台</p>
+					</a>
+				</div>
+				<div class="navItem navItem2">
+					<a href="/cpws/index.html">
+						<img src="/static/index/images/navItem2.png" alt="">
+						<p>裁判文书公开平台</p>
+					</a>
+				</div>
+				<div class="navItem navItem3">
+					<a href="/zxgk/index.html">
+						<img src="/static/index/images/navItem3.png" alt="">
+						<p>执行信息公开平台</p>
+					</a>
+				</div>
+			</div>
+			<div class="navModuleWarp-2 clearfix">
+				<div class="navItem navItem4">
+					<a href="">
+						<span class="tip">法院通过网络接受您提交的一审民商事案件的起诉状和相关诉讼材料或申请执行书并在线审查的一种便民方式。经初步审查后，若您的材料齐全，法院将与您约定具体的立案接待时间，以避免您多次往返。</span>
+						<img src="/static/index/images/navItem4.png" alt="">
+						<p>网上立案</p>
+					</a>
+				</div>
+				<div class="navItem navItem5">
+					<a href="">
+						<span class="tip">依法执行本院作出并发生法律效力的民事判决、裁定、调解和刑事判决、裁定中的财产部分，执行法律规定应由本院执行的仲裁裁决、公证债权文书、行政非诉案件和其他法院委托执行的案件等。</span>
+						<img src="/static/index/images/navItem5.png" alt="">
+						<p>网上执行局</p>
+					</a>
+				</div>
+				<div class="navItem navItem6 active">
+					<a href="">
+						<span class="tip">政务公开将人民法院的工作内容公开化、透明化，对于法院筹划或正准备进行的各项工作内容及进程予以公开，任何公民都可以通过特定途径，如政务公开栏、政务公开网络等进行查询、监督。</span>
+						<img src="/static/index/images/navItem6.png" alt="">
+						<p>政务网站</p>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="copyright">
+		注册单位：达州市中级人民法院  技术支持：深圳市千合科技有限公司<br>
+		蜀ICP备14002101号
+	</div>
+
+	<script type="text/javascript" src="/static/index/js/jquery-1.11.2.min.js"></script>
+	<script src="/static/index/js/layer/layer.js"></script>
+	<script type="text/javascript" src="/static/index/js/common.js"></script>
+	<script type="text/javascript">
+		$(".wecat").click(function() {
+			$(".navModule").addClass('blur');
+			layer.open({
+				type: 1,
+				title:  ["扫描二维码，关注微信公众号！"],
+				closeBtn: 2,
+				shade: [0.7, '#000000'],
+				shadeClose: true,
+				skin: 'yourclass',
+				content: '<img src="images/code.jpg" width="300" height="300" alt="" />',
+				end: function(){
+					$(".navModule").removeClass('blur');
+				}
+			});
+		});
+		
+		$(".navModuleWarp-2 .navItem").hover(function(){
+			$(this).addClass("active").siblings().removeClass("active");
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+{% extends 'zxgk/base.html' %}
+{% block content %}
+    	<link rel="stylesheet" href="../../static/zxgk/css/jquery.fullPage.css">
+	<div id="section-group">
+
+		<div class="section section1">
+			<div class="document-search-bar">
+				<form class="mainBox clearfix" action="">
+					<p class="title">案件执行信息查询</p>
+					<p class="court"><input type="text" placeholder="法院名称"></p>
+					<p class="anhao"><input type="text" placeholder="案号"></p>
+					<p class="password"><input type="password" placeholder="查询密码"></p>
+					<p class="search-btn"><input type="button" value="查询"></p>
+					<p class="reset-btn"><input type="reset" value="清空"></p>
+				</form>
+			</div>
+		</div>
+
+		<!--[if gte IE 9]> <div class="section section2">
+			<h2 class="section-title">数说执行</h2>
+			<p class="section-title-en">EXECUTE BASED IN DATA</p>			 
+	 			<div class="dataChart mainBox">
+					<div id="chart"></div>
+				</div>
+		</div><![endif]-->
+
+		<div class="section section3">
+			<div class="notice">
+				<h2 class="section-title">未结案被执行人信息</h2>
+				<p class="section-title-en">Executed person against</p>
+				<table class="notice-list">
+					<thead>
+						<tr>
+							<th>执行法院</th>
+							<th>案号</th>
+							<th>被执行人名单</th>
+							<th>执行标的</th>
+							<th>立案日期</th>
+						</tr>
+					</thead>
+					<tbody>
+                        {% for foo in ajxxList %}
+						<tr>
+							<td><em class='case-courtName'>{{ foo.cbfy }}</em></td>
+							<td><em class='case-anhao'>{{ foo.ah }}</em></td>
+							<td><em class='case-dishonestPeople'>成都市世德劳务分包有限责任公司</em></td>
+							<td><em class='case-money'>{{ foo.sqzxbd }}</em></td>
+							<td><em class='case-date'>{{ foo.lasj|date:'Y-m-d' }}</em></td>
+						</tr>
+                        {% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="section section4">
+			<h2 class="section-title">执行动态</h2>
+			<p class="section-title-en">Execution dynamics</p>
+			<ul class="document-list clearfix">
+                {% for foo in zxdtList %}
+				<li class="document-item clearfix">
+					<a href="{% url 'views.show' wid=foo.wid %}">
+						<h6 class="num">1</h6>
+						<div class="text-contant">
+							<p class="title">
+								{{ foo.fymc }}：{{ foo.bt }}
+							</p>
+							<p class="summary">
+                                {% autoescape off %}{{ foo.nr|striptags }}{% endautoescape %}
+							</p>
+							<p class="date">
+								<img src="../../static/zxgk/images/date-bg.png" alt="">  {{ foo.fbsj|date:'Y-m-d' }}
+								<img src="../../static/zxgk/images/time-bg.png" alt="">  {{ foo.fbsj|date:'H:i:s' }}
+							</p>
+						</div>
+					</a>
+				</li>
+                {% endfor %}
+            </ul>
+			<div class="copyRight">
+				<p class="right">注册单位：达州市中级人民法院  技术支持：深圳市千合科技有限公司 </p>
+				<p>蜀ICP备14002101号</p>
+			</div>
+		</div>
+		
+	</div>
+
+	<script src="../../static/zxgk/js/jquery-1.11.2.min.js"></script>
+	<script src="../../static/zxgk/js/jquery.fullPage.min.js"></script>
+	<script src="../../static/zxgk/js/laydate/laydate.js"></script>
+	<!--[if gte IE 9]><script src="js/echarts.js"></script>
+	<script src="js/chart.js"></script><![endif]-->
+	<script>
+		// 全屏滚动
+		$(function(){
+			$('#section-group').fullpage({
+				'navigation': true,
+			});
+		});
+
+		// 侧滑导航
+		var isMainNav = 0;
+ 		$(".slide-nav-btn").click(function(){
+ 			if(isMainNav == 0){
+ 				$(".slide-nav").addClass('slide-nav-active');
+ 				$(".section,.header").addClass('nav-active');
+ 				isMainNav = 1;
+ 			}else{
+ 				$(".slide-nav").removeClass('slide-nav-active');
+ 				$(".section,.header").removeClass('nav-active');
+ 				isMainNav = 0;
+ 			}
+		});
+
+		// 文书选项卡
+		$(".type-item").click(function(){
+			$(this).addClass("active").siblings().removeClass("active");
+		});
+
+		$(function(){
+			$(window).scroll(function(){
+				if( $(window).scrollTop() >0 ){
+					$(".header").addClass('shadow');
+				}else{
+					$(".header").removeClass('shadow');
+				}
+			});	
+		});
+
+	</script>
+{% endblock %}

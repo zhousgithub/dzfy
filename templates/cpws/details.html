@@ -1,0 +1,64 @@
+{% extends 'cpws/base.html' %}
+{% block centent %}
+	<div class="wrap">
+		<div class="banner">
+			<img src="/static/cpws/images/document-banner.png" alt="">
+		</div>
+
+		<div class="document-search-bar">
+			<form class="mainBox clearfix" action="">
+				<p class="title">裁判文书查询</p>
+				<p class="keyworld"><input type="text" placeholder="标题"></p>
+				<p class="anhao"><input type="text" placeholder="案号"></p>
+				<p class="start-time"><input placeholder="起始日期" class="laydate-icon" onclick="laydate()"></p>
+				<p class="end-time"><input placeholder="结束日期" class="laydate-icon" onclick="laydate()"></p>
+				<p class="search-btn"><input type="button" value="查询"></p>
+			</form>
+		</div>
+
+		<div class="document-contant">
+			<h3 class="title">
+				{{ cpws.bt }}
+			</h3>
+			<p class="time">
+				发布人：{{ cpws.fbr }}&nbsp;&nbsp;&nbsp;&nbsp;发布时间：{{ cpws.fbsj|date:'Y-m-d H:i:s' }}
+			</p>
+			<div class="contant">
+				<div id="DivContent">{% autoescape off %}{{ cpws.nr }}{% endautoescape %}</div>
+			</div>
+		</div>
+
+		<div class="copyRight">
+			<p class="right">注册单位：达州市中级人民法院  技术支持：深圳市千合科技有限公司 </p>
+			<p>蜀ICP备14002101号</p>
+		</div>
+
+	</div>
+    <script src="/static/cpws/js/jquery-1.11.2.min.js"></script>
+	<script src="/static/cpws/js/laydate/laydate.js"></script>
+	<script>
+		// 侧滑导航
+		var isMainNav = 0;
+ 		$(".main-nav-btn").click(function(){
+ 			if(isMainNav == 0){
+ 				$(".slide-nav").addClass('slide-nav-active');
+ 				$(".wrap,.header").addClass('nav-active');
+ 				isMainNav = 1;
+ 			}else{
+ 				$(".slide-nav").removeClass('slide-nav-active');
+ 				$(".wrap,.header").removeClass('nav-active');
+ 				isMainNav = 0;
+ 			}
+		});
+
+		$(function(){
+			$(window).scroll(function(){
+				if( $(window).scrollTop() >0 ){
+					$(".header").addClass('shadow');
+				}else{
+					$(".header").removeClass('shadow');
+				}
+			});	
+		});
+	</script>
+{% endblock %}

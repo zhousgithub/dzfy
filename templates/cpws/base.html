@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>达州市中级人民法院公共服务网</title>
+	<link rel="stylesheet" type="text/css" href="/static/cpws/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="/static/cpws/css/style.css">
+
+	<style>
+		.section,.header{transition: all .5s ease-in-out;}
+		.nav-active {transform: translateX(-195px) !important;}
+	</style>
+</head>
+<body>
+	<div class="header">
+		<div class="mainBox clearfix">
+			<h1 class="logo">
+				<a href="index.html" title="达州市中级人民法院_裁判文书公开平台">
+					<img src="/static/cpws/images/logo.png" alt="裁判文书公开平台">
+				</a>
+			</h1>
+
+			<ul class="nav-group">
+				<li class="nav-item"><a href="/cpws/index.html" class="active">首页</a></li>
+				<li class="nav-item"><a href="/cpws/ajlx_1/1.html">民事案件</a></li>
+				<li class="nav-item"><a href="/cpws/ajlx_2/1.html">刑事案件</a></li>
+				<li class="nav-item"><a href="/cpws/ajlx_3/1.html">行政案件</a></li>
+				<li class="nav-item"><a href="/cpws/ajlx_4/1.html">执行案件</a></li>
+				<li class="nav-item"><a href="/cpws/ajlx_5/1.html">赔偿案件</a></li>
+			</ul>
+
+			<a href="javascript:;" class="main-nav-btn">
+				<em>导航&nbsp;</em><img src="/static/cpws/images/nav-btn.png">
+			</a>
+		</div>
+	</div>
+
+	<div class="slide-nav">
+		<ul class="slide-nav-group">
+			<li class="slide-nav-item"><a href="javascript:;">网站首页</a></li>
+			<li class="slide-nav-item"><a href="javascript:;">审判流程</a></li>
+			<li class="slide-nav-item"><a href="javascript:;">执行信息</a></li>
+			<li class="slide-nav-item"><a href="javascript:;">裁判文书</a></li>
+			<li class="slide-nav-item"><a href="javascript:;">网上立案</a></li>
+			<li class="slide-nav-item"><a href="javascript:;">网上执行局</a></li>
+			<li class="slide-nav-item"><a href="javascript:;">政务网站</a></li>
+		</ul>
+	</div>
+
+        {% block centent %}
+        {% endblock %}
+</body>
+</html>

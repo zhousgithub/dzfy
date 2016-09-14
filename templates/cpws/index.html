@@ -1,0 +1,161 @@
+{% extends 'cpws/base.html' %}
+
+{% block centent %}
+    <link rel="stylesheet" href="/static/cpws/css/jquery.fullPage.css">
+    <div id="section-group">
+		<div class="section section1">
+			<div class="document-search-bar">
+				<form class="mainBox clearfix" action="">
+					<p class="title">裁判文书查询</p>
+					<p class="keyworld"><input type="text" placeholder="标题"></p>
+					<p class="anhao"><input type="text" placeholder="案号"></p>
+					<p class="start-time"><input placeholder="起始日期" class="laydate-icon" onclick="laydate()"></p>
+					<p class="end-time"><input placeholder="结束日期" class="laydate-icon" onclick="laydate()"></p>
+					<p class="search-btn"><input type="button" value="查询"></p>
+				</form>
+			</div>
+		</div>
+		<div class="section section2">
+			<h2 class="section-title">数说文书</h2>
+			<p class="section-title-en">DOCUMENT BASED IN DATA</p>
+			<div class="dataChart">
+				<div id="chart1"></div>
+				<div id="chart2"></div>
+			</div>
+		</div>
+		
+		<div class="section section3">
+			<h2 class="section-title">裁判文书</h2>
+			<p class="section-title-en">JUDGE DOCUMENT</p>
+			<div class="document">
+				<ul class="document-type clearfix">
+					<li class="type-item active ">
+						<a href="javascript:;">
+							<span class="tip"><img src="/static/cpws/images/tab-tip.png" alt=""></span>
+							<em class="title">民事案件</em>
+						</a>
+					</li>
+					<li class="type-item">
+						<a href="javascript:;">
+							<span class="tip"><img src="/static/cpws/images/tab-tip.png" alt=""></span>
+							<em class="title">刑事案件</em>
+						</a>
+					</li>
+					<li class="type-item">
+						<a href="javascript:;">
+							<span class="tip"><img src="/static/cpws/images/tab-tip.png" alt=""></span>
+							<em class="title">行政案件</em>
+						</a>
+					</li>
+					<li class="type-item">
+						<a href="javascript:;">
+							<span class="tip"><img src="/static/cpws/images/tab-tip.png" alt=""></span>
+							<em class="title">执行案件</em>
+						</a>
+					</li>
+					<li class="type-item">
+						<a href="javascript:;">
+							<span class="tip"><img src="/static/cpws/images/tab-tip.png" alt=""></span>
+							<em class="title">执行案件</em>
+						</a>
+					</li>
+					<li class="type-item">
+						<a href="javascript:;">
+							<span class="tip"><img src="/static/cpws/images/tab-tip.png" alt=""></span>
+							<em class="title">赔偿案件</em>
+						</a>
+					</li>
+					<li class="type-item">
+						<a href="javascript:;">
+							<span class="tip"><img src="/static/cpws/images/tab-tip.png" alt=""></span>
+							<em class="title">&nbsp;&nbsp;更多...</em>
+						</a>
+					</li>
+				</ul>
+				<table class="document-list">
+					<thead>
+						<tr>
+							<th>法院名称</th>
+							<th>文书标题</th>
+							<th>案号</th>
+							<th>发布时间</th>
+						</tr>
+					</thead>
+					<tbody>
+                    {% for foo in wslist %}
+						<tr>
+							<td>{{ foo.fymc }}</td>
+							<td><a href="javascript:;">{{ foo.bt }}</a></td>
+							<td>{{ foo.ajxx.ah }}</td>
+							<td>{{ foo.fbsj|date:'Y-m-d H:i:s' }}</td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="section section4">
+			<h2 class="section-title">裁判文书热搜点击榜</h2>
+			<p class="section-title-en">DOCUMENT Hot search</p>
+			<ul class="document-list clearfix">
+                {% for foo in hostlist %}
+				<li class="document-item clearfix">
+					<a href="{% url 'views.show' cid=foo.cid %}">
+						<h6 class="num">{{ forloop.counter }}</h6>
+						<p class="title">
+							{{ foo.bt }}
+						</p>
+						<span class="date">{{ foo.fbsj|date:'Y-m-d' }}</span>
+					</a>
+				</li>
+                {% endfor %}
+			</ul>
+			<div class="copyRight">
+				<p class="right">注册单位：达州市中级人民法院  技术支持：深圳市千合科技有限公司 </p>
+				<p>粤ICP备<a href="http://www.miitbeian.gov.cn">14077733</a>号</p>
+			</div>
+		</div>
+	</div>
+
+	<script src="/static/cpws/js/jquery-1.11.2.min.js"></script>
+	<script src="/static/cpws/js/jquery.fullPage.min.js"></script>
+	<script src="/static/cpws/js/laydate/laydate.js"></script>
+	<script src="/static/cpws/js/echarts.js"></script>
+	<script src="/static/cpws/js/chart.js"></script>
+	<script>
+		// 全屏滚动
+		$(function(){
+			$('#section-group').fullpage({
+				sectionsColor: ['#eaeef0', '#eaeef0', '#eaeef0', '#eaeef0'],
+				'navigation': true,
+			});
+		});
+
+		// 侧滑导航
+		var isMainNav = 0;
+ 		$(".main-nav-btn").click(function(){
+ 			if(isMainNav == 0){
+ 				$(".slide-nav").addClass('slide-nav-active');
+ 				$(".section,.header").addClass('nav-active');
+ 				isMainNav = 1;
+ 			}else{
+ 				$(".slide-nav").removeClass('slide-nav-active');
+ 				$(".section,.header").removeClass('nav-active');
+ 				isMainNav = 0;
+ 			}
+		});
+
+		// 文书选项卡
+		$(".type-item").click(function(){
+			$(this).addClass("active").siblings().removeClass("active");
+		});
+
+		// 日历控件
+		$(function(){
+
+		});
+	</script>
+
+
+{% endblock %}

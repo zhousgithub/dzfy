@@ -1,0 +1,92 @@
+{% extends 'zxgk/base.html' %}
+{% block content %}
+	<div class="wrap">
+
+		<div class="banner">
+			<img src="../../static/zxgk/images/document-banner.png" alt="">
+		</div>
+
+		<div class="document-search-bar">
+			<form class="mainBox clearfix" action="">
+				<p class="title">案件执行信息查询</p>
+				<p class="court"><input type="text" placeholder="法院名称"></p>
+				<p class="anhao"><input type="text" placeholder="案号"></p>
+				<p class="password"><input type="password" placeholder="查询密码"></p>
+				<p class="search-btn"><input type="button" value="查询"></p>
+				<p class="reset-btn"><input type="reset" value="清空"></p>
+			</form>
+		</div>
+
+		<div class="article notice">
+			<div class="notice-type clearfix">
+				<h3 class="type-title"><em>{{ wzxxList.0.wzlx }}&nbsp;|</em>Execution dynamics</h3>
+				<P class="more">
+					当前位置：
+					<a href="javascript:;">首页</a>
+					&gt;&gt;
+					<a href="javascript:;">{{ wzxxList.0.wzlx }}</a>
+				</P>
+			</div>
+
+			<ul class="article-list clearfix">
+                {% for foo in wzxxList %}
+                
+				<li class="article-item clearfix">
+					<a href="{% url 'views.show' wid=foo.wid %}" target="_blank">
+						<span class="date"><i class="day">27</i><br><i class="month">2014-06</i></span>
+						<p class="title">
+							{{ foo.fymc }}：{{ foo.bt }}
+						</p>
+					</a>
+				</li>
+                {% endfor %}
+			</ul>
+			<div class="page clearfix">
+				<a href="javascript:goPage({{ page }}-1, {{ wzlx }});" class="prev">&lt;上一页</a>
+                {% for p in indexList %}
+                    <a href="javascript:goPage({{ p }}, {{ wzlx }});" class="active">{{ p }}</a>
+                {% endfor %}
+				<a href="javascript:goPage({{ page }}+1, {{ wzlx }});" class="next">下一页&gt;</a>
+			</div>
+		</div>
+
+		<div class="copyRight">
+			<p class="right">注册单位：达州市中级人民法院  技术支持：深圳市千合科技有限公司 </p>
+			<p>蜀ICP备14002101号</p>
+		</div>
+
+	</div>
+	
+	<script src="../../static/zxgk/js/jquery-1.11.2.min.js"></script>
+	<script src="../../static/zxgk/js/laydate/laydate.js"></script>
+        <script>
+        function goPage(page, wzlx) {
+            window.location.href='/zxgk/wzlx_'+wzlx+'/'+page+'.html'
+        }
+    </script>
+	<script>
+		// 侧滑导航
+		var isMainNav = 0;
+ 		$(".slide-nav-btn").click(function(){
+ 			if(isMainNav == 0){
+ 				$(".slide-nav").addClass('slide-nav-active');
+ 				$(".wrap,.header").addClass('nav-active');
+ 				isMainNav = 1;
+ 			}else{
+ 				$(".slide-nav").removeClass('slide-nav-active');
+ 				$(".wrap,.header").removeClass('nav-active');
+ 				isMainNav = 0;
+ 			}
+		});
+
+		$(function(){
+			$(window).scroll(function(){
+				if( $(window).scrollTop() >0 ){
+					$(".header").addClass('shadow');
+				}else{
+					$(".header").removeClass('shadow');
+				}
+			});	
+		});
+	</script>
+{% endblock %}

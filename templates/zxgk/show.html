@@ -1,0 +1,66 @@
+{% extends 'zxgk/base.html' %}
+{% block content %}
+
+	<div class="wrap">
+		<div class="banner">
+			<img src="../../static/zxgk/images/document-banner.png" alt="">
+		</div>
+
+		<div class="document-search-bar">
+			<form class="mainBox clearfix" action="">
+				<p class="title">案件执行信息查询</p>
+				<p class="court"><input type="text" placeholder="法院名称"></p>
+				<p class="anhao"><input type="text" placeholder="案号"></p>
+				<p class="password"><input type="password" placeholder="查询密码"></p>
+				<p class="search-btn"><input type="button" value="查询"></p>
+				<p class="reset-btn"><input type="reset" value="清空"></p>
+			</form>
+		</div>
+
+		<div class="article-contant">
+			<h3 class="title">
+				{{ wzxx.fymc }}：{{ wzxx.bt }}
+			</h3>
+			<p class="time">
+				    发布人：{{ wzxx.fbr }} &nbsp;&nbsp;&nbsp;&nbsp; 发布日期：{{ wzxx.fbsj|date:'Y-m-d H:i:s' }}
+			</p>
+			<div class="contant"><!-- 文章内容 -->
+	            <span id="ctl00_ContentPlaceHolder1_nr">{% autoescape off %}{{ wzxx.nr }}{% endautoescape %}</span>
+	        </div>
+		</div>
+
+		<div class="copyRight">
+			<p class="right">注册单位：达州市中级人民法院  技术支持：深圳市千合科技有限公司 </p>
+			<p>蜀ICP备14002101号</p>
+		</div>
+
+	</div>
+	
+	<script src="../../static/zxgk/js/jquery-1.11.2.min.js"></script>
+	<script src="../../static/zxgk/js/laydate/laydate.js"></script>
+	<script>
+		// 侧滑导航
+		var isMainNav = 0;
+ 		$(".slide-nav-btn").click(function(){
+ 			if(isMainNav == 0){
+ 				$(".slide-nav").addClass('slide-nav-active');
+ 				$(".wrap,.header").addClass('nav-active');
+ 				isMainNav = 1;
+ 			}else{
+ 				$(".slide-nav").removeClass('slide-nav-active');
+ 				$(".wrap,.header").removeClass('nav-active');
+ 				isMainNav = 0;
+ 			}
+		});
+
+		$(function(){
+			$(window).scroll(function(){
+				if( $(window).scrollTop() >0 ){
+					$(".header").addClass('shadow');
+				}else{
+					$(".header").removeClass('shadow');
+				}
+			});	
+		});
+	</script>
+{% endblock %}
