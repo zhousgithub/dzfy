@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="0c49d468-a48a-44f5-b1d9-2ab6e3769468" name="1" url="https://github.com/zhousgithub/dzfy.git">
+        <fileTransfer host="https://github.com/zhousgithub/dzfy.git" port="21" username="zhousgithub">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
