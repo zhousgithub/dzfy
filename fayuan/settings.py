@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'cpws',
     'ajxx',
     'zxgk',
+    'dsrxx',
 ]
 
 MIDDLEWARE = [
@@ -173,4 +174,9 @@ LOGGING = {
         },
     }
 }
+
+MEDIA_ROOT = (
+
+    os.path.join(BASE_DIR, "static/ueditor/image"),
+)
 

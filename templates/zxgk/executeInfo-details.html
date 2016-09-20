@@ -7,7 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="../../static/zxgk/css/style.css">
 </head>
 <body>
-	
+
 	<table class="caseInfo">
 		<thead>
 			<tr>
@@ -17,15 +17,15 @@
 		<tbody>
 			<tr>
 				<td>当前承办人：</td>
-				<td>周康勇</td>
+				<td>{{ ajxx.fgxx.cbr }}</td>
 			</tr>
 			<tr>
 				<td>联系电话：</td>
-				<td>08188622686</td>
+				<td>{{ ajxx.fgxx.lxdh }}</td>
 			</tr>
 			<tr>
 				<td>变更记录：</td>
-				<td></td>
+				<td>{{ ajxx.fgxx.bgjl }}</td>
 			</tr>
 		</tbody>
 	</table>
@@ -39,47 +39,47 @@
 		<tbody>
 			<tr>
 				<td>案号：</td>
-				<td>(2015)万源执字第514号</td>
+				<td>{{ ajxx.ah }}</td>
 			</tr>
 			<tr>
 				<td>案件来源：</td>
-				<td>申请</td>
+				<td>{{ ajxx.ajly }}</td>
 			</tr>
 			<tr>
 				<td>立案时间：</td>
-				<td>2015-08-31</td>
+				<td>{{ ajxx.lasj|date:'Y-m-d' }}</td>
 			</tr>
 			<tr>
 				<td>执行案由：</td>
-				<td>其他合同纠纷</td>
+				<td>{{ ajxx.zxay }}</td>
 			</tr>
 			<tr>
 				<td>执行依据：</td>
-				<td>法院生效裁判</td>
+				<td>{{ ajxx.zxyj }}</td>
 			</tr>
 			<tr>
 				<td>执行依据文书编号：</td>
-				<td>(2015)万源民初字第32号</td>
+				<td>{{ ajxx.zxyjwsbh }}</td>
 			</tr>
 			<tr>
 				<td>生效判决法院及其它机关：</td>
-				<td>万源市人民法院</td>
+				<td>{{ ajxx.sxfyjjg }}</td>
 			</tr>
 			<tr>
 				<td>文书生效日期：</td>
-				<td>2015-07-31 00:00</td>
+				<td>{{ ajxx.sxsj|date:'Y-m-d H:i' }}</td>
 			</tr>
 			<tr>
 				<td>申请执行标的额：</td>
-				<td>93,000.00</td>
+				<td>{{ ajxx.sqzxbd }}</td>
 			</tr>
 			<tr>
 				<td>执行依据主文：</td>
-				<td></td>
+				<td>{{ ajxx.zxyjws }}</td>
 			</tr>
 			<tr>
 				<td>履行情况：</td>
-				<td>未履行</td>
+				<td>{{ ajxx.lxqk }}</td>
 			</tr>
 		</tbody>
 	</table>

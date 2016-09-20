@@ -1,48 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>达州市中级人民法院公共服务网</title>
-	<link rel="stylesheet" type="text/css" href="../../static/zxgk/css/reset.css">
-	<link rel="stylesheet" type="text/css" href="../../static/zxgk/css/style.css">
-</head>
-<body>
-
-	<div class="header shadow">
-		<div class="mainBox clearfix">
-			<h1 class="logo">
-				<a href="index.html" title="达州市中级人民法院_裁判文书公开平台">
-					<img src="../../static/zxgk/images/logo.png" alt="裁判文书公开平台">
-				</a>
-			</h1>
-
-			<ul class="nav-group">
-				<li class="nav-item"><a href="index.html" class="active">首页</a></li>
-				<li class="nav-item"><a href="articleList.html">执行动态</a></li>
-				<li class="nav-item"><a href="executeInfo-list.html">执行信息</a></li>
-				<li class="nav-item"><a href="exposureInfo.html">失信曝光</a></li>
-				<li class="nav-item"><a href="lawList.html">法律法规</a></li>
-				<li class="nav-item"><a href="policeList.html">干警名录</a></li>
-			</ul>
-
-			<a href="javascript:;" class="slide-nav-btn">
-				<em>导航&nbsp;</em><img src="../../static/zxgk/images/nav-btn.png">
-			</a>
-		</div>	
-	</div>
-
-	<div class="slide-nav">
-		<ul class="slide-nav-group">
-			<li class="slide-nav-item"><a href="javascript:;">网站首页</a></li>
-			<li class="slide-nav-item"><a href="javascript:;">审判流程</a></li>
-			<li class="slide-nav-item"><a href="javascript:;">执行信息</a></li>
-			<li class="slide-nav-item"><a href="javascript:;">裁判文书</a></li>
-			<li class="slide-nav-item"><a href="javascript:;">网上立案</a></li>
-			<li class="slide-nav-item"><a href="javascript:;">政务网站</a></li>
-			<li class="slide-nav-item"><a href="javascript:;">网上执行局</a></li>
-			<li class="slide-nav-item"><a href="javascript:;">诉讼服务中心</a></li>
-		</ul>
-	</div>
+{% extends 'zxgk/base.html' %}
+{% block content %}
 
 	<div class="wrap">
 
@@ -83,166 +40,26 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td><em class='case-courtName'>达州市通川区人民法院</em></td>
+                {% for foo in ajlist %}
+                    <tr>
+						<td><em class='case-courtName'>{{ foo.cbfy }}</em></td>
 						<td><em class='case-anhao'>
-							<a href="javascript:;" class='anhao'>(2015)通川执字第681号</a>
+							<a href='javascript:show("{{ foo.aid }}","{{ foo.ah }}");' class='anhao'>{{ foo.ah }}</a>
 						</em></td>
-						<td><em class='case-date'>2015-08-31</em></td>
-						<td><em class='case-managePeople'>桂娟</em></td>
-						<td><em class='case-money'>42684.3900</em></td>
-						<td><em class='case-chedule'>未履行</em></td>
+						<td><em class='case-date'>{{ foo.lasj|date:'Y-m-d' }}</em></td>
+						<td><em class='case-managePeople'>{{ foo.fgxx }}</em></td>
+						<td><em class='case-money'>{{ foo.sqzxbd }}</em></td>
+						<td><em class='case-chedule'>{{ foo.lxqk }}</em></td>
 					</tr>
-					<tr>
-						<td><em class='case-courtName'>达州市通川区人民法院</em></td>
-						<td><em class='case-anhao'>
-							<a href="javascript:;" class='anhao'>(2015)通川执字第681号</a>
-						</em></td>
-						<td><em class='case-date'>2015-08-31</em></td>
-						<td><em class='case-managePeople'>桂娟</em></td>
-						<td><em class='case-money'>42684.3900</em></td>
-						<td><em class='case-chedule'>未履行</em></td>
-					</tr>
-					<tr>
-						<td><em class='case-courtName'>达州市通川区人民法院</em></td>
-						<td><em class='case-anhao'>
-							<a href="javascript:;" class='anhao'>(2015)通川执字第681号</a>
-						</em></td>
-						<td><em class='case-date'>2015-08-31</em></td>
-						<td><em class='case-managePeople'>桂娟</em></td>
-						<td><em class='case-money'>42684.3900</em></td>
-						<td><em class='case-chedule'>未履行</em></td>
-					</tr>
-					<tr>
-						<td><em class='case-courtName'>达州市通川区人民法院</em></td>
-						<td><em class='case-anhao'>
-							<a href="javascript:;" class='anhao'>(2015)通川执字第681号</a>
-						</em></td>
-						<td><em class='case-date'>2015-08-31</em></td>
-						<td><em class='case-managePeople'>桂娟</em></td>
-						<td><em class='case-money'>42684.3900</em></td>
-						<td><em class='case-chedule'>未履行</em></td>
-					</tr>
-					<tr>
-						<td><em class='case-courtName'>达州市通川区人民法院</em></td>
-						<td><em class='case-anhao'>
-							<a href="javascript:;" class='anhao'>(2015)通川执字第681号</a>
-						</em></td>
-						<td><em class='case-date'>2015-08-31</em></td>
-						<td><em class='case-managePeople'>桂娟</em></td>
-						<td><em class='case-money'>42684.3900</em></td>
-						<td><em class='case-chedule'>未履行</em></td>
-					</tr>
-					<tr>
-						<td><em class='case-courtName'>达州市通川区人民法院</em></td>
-						<td><em class='case-anhao'>
-							<a href="javascript:;" class='anhao'>(2015)通川执字第681号</a>
-						</em></td>
-						<td><em class='case-date'>2015-08-31</em></td>
-						<td><em class='case-managePeople'>桂娟</em></td>
-						<td><em class='case-money'>42684.3900</em></td>
-						<td><em class='case-chedule'>未履行</em></td>
-					</tr>
-					<tr>
-						<td><em class='case-courtName'>达州市通川区人民法院</em></td>
-						<td><em class='case-anhao'>
-							<a href="javascript:;" class='anhao'>(2015)通川执字第681号</a>
-						</em></td>
-						<td><em class='case-date'>2015-08-31</em></td>
-						<td><em class='case-managePeople'>桂娟</em></td>
-						<td><em class='case-money'>42684.3900</em></td>
-						<td><em class='case-chedule'>未履行</em></td>
-					</tr>
-					<tr>
-						<td><em class='case-courtName'>达州市通川区人民法院</em></td>
-						<td><em class='case-anhao'>
-							<a href="javascript:;" class='anhao'>(2015)通川执字第681号</a>
-						</em></td>
-						<td><em class='case-date'>2015-08-31</em></td>
-						<td><em class='case-managePeople'>桂娟</em></td>
-						<td><em class='case-money'>42684.3900</em></td>
-						<td><em class='case-chedule'>未履行</em></td>
-					</tr>
-					<tr>
-						<td><em class='case-courtName'>达州市通川区人民法院</em></td>
-						<td><em class='case-anhao'>
-							<a href="javascript:;" class='anhao'>(2015)通川执字第681号</a>
-						</em></td>
-						<td><em class='case-date'>2015-08-31</em></td>
-						<td><em class='case-managePeople'>桂娟</em></td>
-						<td><em class='case-money'>42684.3900</em></td>
-						<td><em class='case-chedule'>未履行</em></td>
-					</tr>
-					<tr>
-						<td><em class='case-courtName'>达州市通川区人民法院</em></td>
-						<td><em class='case-anhao'>
-							<a href="javascript:;" class='anhao'>(2015)通川执字第681号</a>
-						</em></td>
-						<td><em class='case-date'>2015-08-31</em></td>
-						<td><em class='case-managePeople'>桂娟</em></td>
-						<td><em class='case-money'>42684.3900</em></td>
-						<td><em class='case-chedule'>未履行</em></td>
-					</tr>
-					<tr>
-						<td><em class='case-courtName'>达州市通川区人民法院</em></td>
-						<td><em class='case-anhao'>
-							<a href="javascript:;" class='anhao'>(2015)通川执字第681号</a>
-						</em></td>
-						<td><em class='case-date'>2015-08-31</em></td>
-						<td><em class='case-managePeople'>桂娟</em></td>
-						<td><em class='case-money'>42684.3900</em></td>
-						<td><em class='case-chedule'>未履行</em></td>
-					</tr>
-					<tr>
-						<td><em class='case-courtName'>达州市通川区人民法院</em></td>
-						<td><em class='case-anhao'>
-							<a href="javascript:;" class='anhao'>(2015)通川执字第681号</a>
-						</em></td>
-						<td><em class='case-date'>2015-08-31</em></td>
-						<td><em class='case-managePeople'>桂娟</em></td>
-						<td><em class='case-money'>42684.3900</em></td>
-						<td><em class='case-chedule'>未履行</em></td>
-					</tr>
-					<tr>
-						<td><em class='case-courtName'>达州市通川区人民法院</em></td>
-						<td><em class='case-anhao'>
-							<a href="javascript:;" class='anhao'>(2015)通川执字第681号</a>
-						</em></td>
-						<td><em class='case-date'>2015-08-31</em></td>
-						<td><em class='case-managePeople'>桂娟</em></td>
-						<td><em class='case-money'>42684.3900</em></td>
-						<td><em class='case-chedule'>未履行</em></td>
-					</tr>
-					<tr>
-						<td><em class='case-courtName'>达州市通川区人民法院</em></td>
-						<td><em class='case-anhao'>
-							<a href="javascript:;" class='anhao'>(2015)通川执字第681号</a>
-						</em></td>
-						<td><em class='case-date'>2015-08-31</em></td>
-						<td><em class='case-managePeople'>桂娟</em></td>
-						<td><em class='case-money'>42684.3900</em></td>
-						<td><em class='case-chedule'>未履行</em></td>
-					</tr>
-					<tr>
-						<td><em class='case-courtName'>达州市通川区人民法院</em></td>
-						<td><em class='case-anhao'>
-							<a href="javascript:;" class='anhao'>(2015)通川执字第681号</a>
-						</em></td>
-						<td><em class='case-date'>2015-08-31</em></td>
-						<td><em class='case-managePeople'>桂娟</em></td>
-						<td><em class='case-money'>42684.3900</em></td>
-						<td><em class='case-chedule'>未履行</em></td>
-					</tr>
+                {% endfor %}
 				</tbody>
 			</table>
 			<div class="page clearfix">
-				<a href="javascript:;" class="prev">&lt;上一页</a>
-				<a href="javascript:;" class="active">1</a>
-				<a href="javascript:;">2</a>
-				<a href="javascript:;">3</a>
-				<a href="javascript:;">4</a>
-				<a href="javascript:;">5</a>
-				<a href="javascript:;" class="next">下一页&gt;</a>
+				<a href="javascript:goPage({{ pageInfor.page }}-1);" class="prev">&lt;上一页</a>
+                {% for p in pageInfor.indexList %}
+                    <a href="javascript:goPage({{ p }});" class="active">{{ p }}</a>
+                {% endfor %}
+				<a href="javascript:goPage({{ pageInfor.page }}+1);" class="next">下一页&gt;</a>
 			</div>
 		</div>
 
@@ -282,22 +99,58 @@
 			});	
 		});
 
-		$(".case-anhao").click(function() {
-			$(".wrap").addClass('blur');
-			layer.open({
-				type: 2,
-				title:  ["执行信息公开"+" - "+"(2015)通川执字第681号"],
-				closeBtn: 2,
-				shade: [0.7, '#000000'],
-				area: ['600px', '680px'],
-				shadeClose: true,
-				skin: 'yourclass',
-				content: ['executeInfo-details.html','no'],
-				end: function(){
-					$(".wrap").removeClass('blur');
-				}
-			});
-		});
+        function show(aid,ah) {
+
+
+            $(".wrap").addClass('blur');
+                layer.open({
+                    type: 2,
+                    title:  ["执行信息公开"+" - "+ah],
+                    closeBtn: 2,
+                    shade: [0.7, '#000000'],
+                    area: ['600px', '680px'],
+                    shadeClose: true,
+                    skin: 'yourclass',
+                    content: ['/zxgk/ajxq/'+aid+'.html','no'],
+                    end: function(){
+                        $(".wrap").removeClass('blur');
+                    }
+            });
+        }
+
+        function goPage(page) {
+
+            window.location.href = "/zxgk/zxgk/" + page + ".html";
+
+{#            $.ajax({#}
+{#                type: "POST",#}
+{#                url: "/zxgk/zxgk/" + page + ".html",#}
+{#                data: "",#}
+{#                success: function (data) {#}
+{#                    ajxx = JSON.stringify(data)#}
+{#                    alert(ajxx);#}
+{#                    $(".wrap").addClass('blur');#}
+{#                    layer.open({#}
+{#                        type: 2,#}
+{#                        title: ["执行信息公开" + " - " + ah],#}
+{#                        closeBtn: 2,#}
+{#                        shade: [0.7, '#000000'],#}
+{#                        area: ['600px', '680px'],#}
+{#                        shadeClose: true,#}
+{#                        skin: 'yourclass',#}
+{#                        content: ['executeInfo-details.html', 'no'],#}
+{#                        end: function () {#}
+{#                            $(".wrap").removeClass('blur');#}
+{#                        }#}
+{#                    });#}
+{#                },#}
+{#                error: function (errorInfo) {#}
+{#                    alert('errorInfo='+errorInfo)#}
+{#                }#}
+{#            });#}
+        }
+
+
+
 	</script>
-</body>
-</html>
+{% endblock %}
