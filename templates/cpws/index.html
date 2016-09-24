@@ -29,48 +29,14 @@
 			<p class="section-title-en">JUDGE DOCUMENT</p>
 			<div class="document">
 				<ul class="document-type clearfix">
-					<li class="type-item active ">
-						<a href="javascript:;">
+                    {% for foo in ajlxlist %}
+                    <li class="type-item {% ifequal forloop.counter|add:'0' 1 %} active {% endifequal %}">
+						<a href="javascript:go({{ foo.id }});">
 							<span class="tip"><img src="/static/cpws/images/tab-tip.png" alt=""></span>
-							<em class="title">民事案件</em>
+							<em class="title">{{ foo.lx }}</em>
 						</a>
 					</li>
-					<li class="type-item">
-						<a href="javascript:;">
-							<span class="tip"><img src="/static/cpws/images/tab-tip.png" alt=""></span>
-							<em class="title">刑事案件</em>
-						</a>
-					</li>
-					<li class="type-item">
-						<a href="javascript:;">
-							<span class="tip"><img src="/static/cpws/images/tab-tip.png" alt=""></span>
-							<em class="title">行政案件</em>
-						</a>
-					</li>
-					<li class="type-item">
-						<a href="javascript:;">
-							<span class="tip"><img src="/static/cpws/images/tab-tip.png" alt=""></span>
-							<em class="title">执行案件</em>
-						</a>
-					</li>
-					<li class="type-item">
-						<a href="javascript:;">
-							<span class="tip"><img src="/static/cpws/images/tab-tip.png" alt=""></span>
-							<em class="title">执行案件</em>
-						</a>
-					</li>
-					<li class="type-item">
-						<a href="javascript:;">
-							<span class="tip"><img src="/static/cpws/images/tab-tip.png" alt=""></span>
-							<em class="title">赔偿案件</em>
-						</a>
-					</li>
-					<li class="type-item">
-						<a href="javascript:;">
-							<span class="tip"><img src="/static/cpws/images/tab-tip.png" alt=""></span>
-							<em class="title">&nbsp;&nbsp;更多...</em>
-						</a>
-					</li>
+                    {% endfor %}
 				</ul>
 				<table class="document-list">
 					<thead>
@@ -81,7 +47,7 @@
 							<th>发布时间</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="tbody">
                     {% for foo in wslist %}
 						<tr>
 							<td>{{ foo.fymc }}</td>
@@ -101,7 +67,7 @@
 			<ul class="document-list clearfix">
                 {% for foo in hostlist %}
 				<li class="document-item clearfix">
-					<a href="{% url 'views.show' cid=foo.cid %}">
+					<a href="{% url 'ws.show' foo.ajxx.ajlx.id foo.cid %}">
 						<h6 class="num">{{ forloop.counter }}</h6>
 						<p class="title">
 							{{ foo.bt }}
@@ -124,6 +90,49 @@
 	<script src="/static/cpws/js/echarts.js"></script>
 	<script src="/static/cpws/js/chart.js"></script>
 	<script>
+        function go(lx) {
+            $("#tbody").html("");
+            var list = "";
+            $.ajax({
+                type:'GET',
+                url:'/cpws/byAjlx/'+lx,
+                data:'',
+                success:function (data) {
+                    if (data.length){
+                        for(var i=0; i<data.length; i++){
+                            wzxx = data[i];
+                            list += '<tr><td>'+data[i].fields.fymc+'</td><td><a href="/cpws/'+wzxx.fields.bt+'">'+data[i].fields.bt+'</a></td><td>'+data[i].fields.ajxx+'</td><td>'+data[i].fields.fbsj+'</td></tr>';
+{#                            alert(data[i].fields.bt)#}
+                        }
+                    }
+{#                    alert(data)#}
+                    $("#tbody").html(list);
+                },
+                error:function (data) {
+                alert('数据加载出错，请联系管理员～')
+            }
+            });
+        }
+
+        Date.prototype.Format = function(fmt)
+            { //author: meizz
+             var o = {
+              "M+" : this.getMonth()+1,         //月份
+              "d+" : this.getDate(),          //日
+              "h+" : this.getHours(),          //小时
+              "m+" : this.getMinutes(),         //分
+              "s+" : this.getSeconds(),         //秒
+              "q+" : Math.floor((this.getMonth()+3)/3), //季度
+              "S" : this.getMilliseconds()       //毫秒
+             };
+             if(/(y+)/.test(fmt))
+              fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+             for(var k in o)
+              if(new RegExp("("+ k +")").test(fmt))
+             fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+             return fmt;
+            }
+
 		// 全屏滚动
 		$(function(){
 			$('#section-group').fullpage({

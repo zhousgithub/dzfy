@@ -1,0 +1,77 @@
+{% extends 'splc/base.html' %}
+{% block content %}
+
+	<div class="wrap">
+
+		<div class="banner">
+			<img src="../../static/splc/images/document-banner.png" alt="">
+		</div>
+
+		<div class="document-search-bar">
+			<form class="mainBox clearfix" action="">
+				<p class="title">案件审判进度查询</p>
+				<p class="court"><input type="text" placeholder="法院名称"></p>
+				<p class="anhao"><input type="text" placeholder="案号"></p>
+				<p class="password"><input type="password" placeholder="查询密码"></p>
+				<p class="search-btn"><input type="button" value="查询"></p>
+				<p class="reset-btn"><input type="reset" value="清空"></p>
+			</form>
+		</div>
+
+		<div class="article notice">
+			<ul class="article-list clearfix">
+                {% for foo in wzlist %}
+                <li class="article-item clearfix">
+					<a href="{% url 'zn.show' wid=foo.wid %}">
+						<span class="date"><i class="day">{{ foo.fbsj|date:'d' }}</i><br><i class="month">{{ foo.fbsj|date:'Y-m' }}</i></span>
+						<p class="title">
+							{{ foo.bt }}
+						</p>
+					</a>
+				</li>
+                {% endfor %}
+			</ul>
+			<div class="page clearfix">
+				<a href="{% url 'views.znList' lx pageInfo.page|add:'-1' %}" class="prev">&lt;上一页</a>
+                {% for p in pageInfo.indexList %}
+				<a href="{% url 'views.znList' lx p %}" {% ifequal pageInfo.page|add:'0' p|add:'0' %} class="active" {% endifequal %}>{{ p }}</a>
+				{% endfor %}
+				<a href="{% url 'views.znList' lx pageInfo.page|add:'+1' %}" class="next">下一页&gt;</a>
+			</div>
+		</div>
+
+		<div class="copyRight">
+			<p class="right">注册单位：达州市中级人民法院  技术支持：深圳市千合科技有限公司 </p>
+			<p>蜀ICP备14002101号</p>
+		</div>
+
+	</div>
+	
+	<script src="../../static/splc/js/jquery-1.11.2.min.js"></script>
+	<script src="../../static/splc/js/laydate/laydate.js"></script>
+	<script>
+		// 侧滑导航
+		var isMainNav = 0;
+ 		$(".slide-nav-btn").click(function(){
+ 			if(isMainNav == 0){
+ 				$(".slide-nav").addClass('slide-nav-active');
+ 				$(".wrap,.header").addClass('nav-active');
+ 				isMainNav = 1;
+ 			}else{
+ 				$(".slide-nav").removeClass('slide-nav-active');
+ 				$(".wrap,.header").removeClass('nav-active');
+ 				isMainNav = 0;
+ 			}
+		});
+
+		$(function(){
+			$(window).scroll(function(){
+				if( $(window).scrollTop() >0 ){
+					$(".header").addClass('shadow');
+				}else{
+					$(".header").removeClass('shadow');
+				}
+			});	
+		});
+	</script>
+{% endblock %}

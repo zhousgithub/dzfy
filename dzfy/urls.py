@@ -22,7 +22,7 @@ urlpatterns = [
     url(r'^$', views.home),
     # url(r'^image/imageUp', views.imageUp),
     # url(r'^insert/', views.insert),
-    url(r'^ueditor_imgup', views.ueditor_ImgUp),
-    url(r'^upfile/', views.upfile),
+    # url(r'^ueditor_imgup', views.ueditor_ImgUp),
+    # url(r'^upfile/', views.upfile),
     # url(r'^select/', views.select),
 ]

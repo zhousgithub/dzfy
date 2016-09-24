@@ -9,7 +9,7 @@ from dzfy.models import Fyxx, Wzlx
 
 
 class Fgxx(models.Model):
-    fid = models.CharField(max_length=100, default=str(uuid.uuid4()).replace('-', ''))
+    fid = models.UUIDField(max_length=100, default=uuid.uuid1, editable=False)
     cbr = models.CharField(max_length=20, verbose_name='承办人')
     lxdh = models.CharField(max_length=11, null=True, verbose_name='联系电话')
     bgjl = models.TextField(verbose_name='变更记录', null=True)
@@ -22,7 +22,7 @@ class Fgxx(models.Model):
         verbose_name_plural = '法官信息'
 
 class Wzxx(models.Model):
-    wid = models.CharField(max_length=100, default=str(uuid.uuid4()).replace('-', ''))
+    wid = models.UUIDField(max_length=100, default=uuid.uuid1, editable=False)
     FY_CHOICES = [(1, '达州市中级人民法院'), (2, '开源法院')]
     # fymc = models.IntegerField(max_length=50, choices=FY_CHOICES, verbose_name='法院名称')
     # LX_CHOICES = [(1, '执行动态'), (1, '法律法规'), ]
@@ -37,7 +37,7 @@ class Wzxx(models.Model):
     def __str__(self):
         return self.bt
     class Meta:
-        verbose_name = '文章管理'
-        verbose_name_plural = '文章管理'
+        verbose_name = '新闻/指南管理'
+        verbose_name_plural = '新闻/指南管理'
         ordering = ['-fbsj']
 

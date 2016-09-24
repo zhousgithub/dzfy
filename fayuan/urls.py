@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^cpws/', include('cpws.urls')),
     url(r'^ajxx/', include('ajxx.urls')),
     url(r'^zxgk/', include('zxgk.urls')),
+    url(r'^splc/', include('splc.urls')),
 
 ]

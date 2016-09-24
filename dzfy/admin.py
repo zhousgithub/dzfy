@@ -3,7 +3,7 @@ from django.contrib import admin
 # Register your models here.
 from ajxx.models import Ajxx
 from cpws.models import Cpws
-from dzfy.models import Fyxx, Wzlx
+from dzfy.models import Fyxx, Wzlx, Gjxx, Gjlb
 from zxgk.models import Wzxx, Fgxx
 
 class BaseAdmin(admin.ModelAdmin):
@@ -24,16 +24,6 @@ class WzxxAdmin(BaseAdmin):
 
 admin.site.register(Wzxx, WzxxAdmin)
 
-class AjxxAdmin(BaseAdmin):
-
-    list_display = ('ah', 'ajly', 'lasj', 'fgxx')
-    search_fields = ['ah']
-    fields = ('fgxx', 'ah', 'ajly', 'lasj', 'ktsj', 'cbft', 'zxay', 'zxyj', 'zxyjwsbh',
-              'sxfyjjg', 'sqzxbd', 'sxsj', 'zxyjws', 'lxqk')
-
-admin.site.register(Ajxx, AjxxAdmin)
-
-
 class FgxxAdmin(BaseAdmin):
 
     list_display = ('cbr', 'lxdh')
@@ -42,12 +32,6 @@ class FgxxAdmin(BaseAdmin):
 
 admin.site.register(Fgxx, FgxxAdmin)
 
-class CpwsAdmin(BaseAdmin):
-    list_display = ('ajxx', 'bt', 'fbsj', 'fbr')
-    search_fields = ['ajxx', 'bt', ]
-    fields = ('ajxx', 'bt', 'fbr', 'nr')
-
-admin.site.register(Cpws, CpwsAdmin)
 
 class FyxxAdmin(BaseAdmin):
     search_fields = ['name', ]
@@ -58,3 +42,21 @@ class WzlxAdmin(BaseAdmin):
     search_fields = ['name', ]
 
 admin.site.register(Wzlx, WzlxAdmin)
+
+
+class GjlbAdmin(BaseAdmin):
+
+    search_fields = ['mc', ]
+admin.site.register(Gjlb, GjlbAdmin)
+
+class GjxxAdmin(BaseAdmin):
+    list_display = ('gjlb', 'xm', 'zc', 'dh')
+    search_fields = ['xm', 'zc']
+
+    # def queryset(self, request):
+    #     qs = super(GjxxAdmin, self).queryset(request)
+    #     if request.user.is_superuser:
+    #         return qs
+    #     return qs.filter(uploader=request.user)
+
+admin.site.register(Gjxx, GjxxAdmin)

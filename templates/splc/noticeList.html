@@ -1,0 +1,107 @@
+{% extends 'splc/base.html' %}
+{% block content %}
+
+	<div class="wrap">
+
+		<div class="banner">
+			<img src="../../static/splc/images/document-banner.png" alt="">
+		</div>
+
+		<div class="document-search-bar">
+			<form class="mainBox clearfix" action="">
+				<p class="title">案件审判进度查询</p>
+				<p class="court"><input type="text" placeholder="法院名称"></p>
+				<p class="anhao"><input type="text" placeholder="案号"></p>
+				<p class="password"><input type="password" placeholder="查询密码"></p>
+				<p class="search-btn"><input type="button" value="查询"></p>
+				<p class="reset-btn"><input type="reset" value="清空"></p>
+			</form>
+		</div>
+
+		<div class="notice">
+			<div class="notice-type clearfix">
+				<h3 class="type-title"><em>开庭公告&nbsp;|</em>NOTICE OF SESSION CASE</h3>
+				<P class="more">
+					当前位置：
+					<a href="javascript:;">首页</a>
+					&gt;&gt;
+					<a href="javascript:;">开庭公告</a>
+				</P>
+			</div>
+			<table class="notice-list">
+				<thead>
+					<tr>
+						<th>开庭日期</th>
+						<th>案号</th>
+						<th>案由</th>
+						<th>承办人</th>
+						<th>承办法庭</th>
+						<th>原告/上诉人</th>
+					</tr>
+				</thead>
+				<tbody>
+                        {% for foo in ktlist %}
+                            <tr>
+                                <td>{{ foo.ktsj|date:'Y-m-d' }}</td>
+                                <td>{{ foo.ah }}</td>
+                                <td>{% autoescape off %}{{ foo.zxay }}{% endautoescape %}</td>
+                                <td>{% autoescape off %}{{ foo.fgxx }}{% endautoescape %}</td>
+                                <td>{% autoescape off %}{{ foo.cbft }}{% endautoescape %}</td>
+                                <td>
+                                    原告：{% for fo in foo.dsrxx_set.all %}
+                                    {% ifequal fo.dsrlx '原告' %}{{ fo.dsrxm }}{% if not forloop.last %},{% endif %}{% endifequal %}
+                                    {% endfor %}
+                                    被告：{% for fo in foo.dsrxx_set.all %}
+                                    {% ifequal fo.dsrlx '被告' %}{{ fo.dsrxm }}{% if not forloop.last %},{% endif %}{% endifequal %}
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+
+				</tbody>
+			</table>
+			<div class="page clearfix">
+                <a href="{% url 'views.ktList' 1 %}" class="prev">&lt;首页</a>
+                {% for p in pageInfo.indexList %}
+				<a href="{% url 'views.ktList' p %}" {% ifequal pageInfo.page|add:'0' p|add:'0' %} class="active" {% endifequal %}>{{ p }}</a>
+				{% endfor %}
+				<a href="{% url 'views.ktList' pageInfo.totalPage|add:'0' %}" class="next">尾页&gt;</a>
+			</div>
+		</div>
+
+		<div class="copyRight">
+			<p class="right">注册单位：达州市中级人民法院  技术支持：深圳市千合科技有限公司 </p>
+			<p>蜀ICP备14002101号</p>
+		</div>
+
+	</div>
+	
+	<script src="../../static/splc/js/jquery-1.11.2.min.js"></script>
+	<script src="../../static/splc/js/laydate/laydate.js"></script>
+	<script>
+		// 侧滑导航
+		var isMainNav = 0;
+ 		$(".slide-nav-btn").click(function(){
+ 			if(isMainNav == 0){
+ 				$(".slide-nav").addClass('slide-nav-active');
+ 				$(".wrap,.header").addClass('nav-active');
+ 				isMainNav = 1;
+ 			}else{
+ 				$(".slide-nav").removeClass('slide-nav-active');
+ 				$(".wrap,.header").removeClass('nav-active');
+ 				isMainNav = 0;
+ 			}
+		});
+
+		$(function(){
+			$(window).scroll(function(){
+				if( $(window).scrollTop() >0 ){
+					$(".header").addClass('shadow');
+				}else{
+					$(".header").removeClass('shadow');
+				}
+			});	
+		});
+	</script>
+{% endblock %}

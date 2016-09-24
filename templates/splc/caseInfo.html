@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>达州市中级人民法院公共服务网</title>
+	<link rel="stylesheet" type="text/css" href="../../static/splc/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../../static/splc/css/style.css">
+</head>
+<body>
+
+	<div class="header shadow">
+		<div class="mainBox clearfix">
+			<h1 class="logo">
+				<a href="index.html" title="达州市中级人民法院_裁判文书公开平台">
+					<img src="../../static/splc/images/logo.png" alt="裁判文书公开平台">
+				</a>
+			</h1>
+
+			<ul class="nav-group">
+				<li class="nav-item"><a href="index.html" class="active">首页</a></li>
+				<li class="nav-item"><a href="ajcx.html">审判流程</a></li>
+				<li class="nav-item"><a href="noticeList.html">开庭公告</a></li>
+				<li class="nav-item"><a href="articleList.html">减刑假释</a></li>
+				<li class="nav-item"><a href="guideList.html">诉讼指南</a></li>
+				<li class="nav-item"><a href="videoList.html">庭审视频</a></li>
+			</ul>
+
+			<a href="javascript:;" class="slide-nav-btn">
+				<em>导航&nbsp;</em><img src="../../static/splc/images/nav-btn.png">
+			</a>
+		</div>	
+	</div>
+
+	<div class="slide-nav">
+		<ul class="slide-nav-group">
+			<li class="slide-nav-item"><a href="javascript:;">网站首页</a></li>
+			<li class="slide-nav-item"><a href="javascript:;">审判流程</a></li>
+			<li class="slide-nav-item"><a href="javascript:;">执行信息</a></li>
+			<li class="slide-nav-item"><a href="javascript:;">裁判文书</a></li>
+			<li class="slide-nav-item"><a href="javascript:;">网上立案</a></li>
+			<li class="slide-nav-item"><a href="javascript:;">政务网站</a></li>
+			<li class="slide-nav-item"><a href="javascript:;">网上执行局</a></li>
+			<li class="slide-nav-item"><a href="javascript:;">诉讼服务中心</a></li>
+		</ul>
+	</div>
+
+	<div class="wrap">
+
+		<div class="banner">
+			<img src="../../static/splc/images/document-banner.png" alt="">
+		</div>
+
+		<div class="document-search-bar">
+			<form class="mainBox clearfix" action="">
+				<p class="title">案件审判进度查询</p>
+				<p class="court"><input type="text" placeholder="法院名称"></p>
+				<p class="anhao"><input type="text" placeholder="案号"></p>
+				<p class="password"><input type="password" placeholder="查询密码"></p>
+				<p class="search-btn"><input type="button" value="查询"></p>
+				<p class="reset-btn"><input type="reset" value="清空"></p>
+			</form>
+		</div>
+
+		<div class="copyRight">
+			<p class="right">注册单位：达州市中级人民法院  技术支持：深圳市千合科技有限公司 </p>
+			<p>蜀ICP备14002101号</p>
+		</div>
+
+	</div>
+	
+	<script src="../../static/splc/js/jquery-1.11.2.min.js"></script>
+	<script src="../../static/splc/js/laydate/laydate.js"></script>
+	<script>
+		// 侧滑导航
+		var isMainNav = 0;
+ 		$(".slide-nav-btn").click(function(){
+ 			if(isMainNav == 0){
+ 				$(".slide-nav").addClass('slide-nav-active');
+ 				$(".wrap,.header").addClass('nav-active');
+ 				isMainNav = 1;
+ 			}else{
+ 				$(".slide-nav").removeClass('slide-nav-active');
+ 				$(".wrap,.header").removeClass('nav-active');
+ 				isMainNav = 0;
+ 			}
+		});
+
+		$(function(){
+			$(window).scroll(function(){
+				if( $(window).scrollTop() >0 ){
+					$(".header").addClass('shadow');
+				}else{
+					$(".header").removeClass('shadow');
+				}
+			});	
+		});
+	</script>
+</body>
+</html>

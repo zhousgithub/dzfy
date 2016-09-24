@@ -1,11 +1,16 @@
+import json
 import math
 
+from django.core import serializers
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.http import JsonResponse
+from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from ajxx.models import Ajxx
-from dzfy.models import Wzlx
+from dsrxx.models import Dsrxx
+from dzfy.models import Wzlx, Gjlb, Gjxx
+from utils.JsonUtil import class_to_dict
 from zxgk.models import Wzxx
 from utils import JsonUtil
 from utils import PageUtil
@@ -21,7 +26,7 @@ def index(request):
 
 def show(request, wid):
 
-    wzxx = Wzxx.objects.get(wid=wid)
+    wzxx = get_object_or_404(Wzxx, wid=wid)
 
     return render(request, 'zxgk/show.html', {'wzxx': wzxx})
 
@@ -113,9 +118,50 @@ def ajShow(request, aid):
         ajxx = Ajxx.objects.get(aid=aid)
         return render(request, 'zxgk/executeInfo-details.html', {'ajxx': ajxx})
 
+
 def sxpg(request, page):
     limit = 4
-    totalCount = Ajxx.objects.all().count()
+    totalCount = Dsrxx.objects.filter(sxqk='2').count()#1.失去信用，2.失信
     pageInfor = PageUtil.getPage(page, limit, totalCount)
-    ajlist = Ajxx.objects.all()[(pageInfor.get('page') - 1) * limit:pageInfor.get('page') * limit]
-    return render(request, 'zxgk/executeInfo-list.html', {'ajlist': ajlist, 'pageInfor': pageInfor})
+    dsrlist = Dsrxx.objects.filter(sxqk='2')[(pageInfor.get('page') - 1) * limit:pageInfor.get('page') * limit]
+    return render(request, 'zxgk/exposureInfo.html', {'dsrlist': dsrlist, 'pageInfor': pageInfor})
+
+
+def sxgk(request, did):
+    if did:
+        dsrxx = Dsrxx.objects.get(did=did)
+        return render(request, 'zxgk/exposureInfo-details.html', {'dsrxx': dsrxx})
+
+def gjml(request, gjlb):
+    gjxxlist = ''
+    gjlblist = Gjlb.objects.all()
+    if gjlb:
+        if int(gjlb) == 0:
+            gjlx = Gjlb.objects.all().order_by('-id').reverse()[0]
+            gjxxlist = Gjxx.objects.filter(gjlb=gjlx)
+        else:
+            gjlx = Gjlb.objects.get(id=int(gjlb))
+            if gjlx:
+                gjxxlist = Gjxx.objects.filter(gjlb=gjlx)
+        return render(request, 'zxgk/policeList.html', {'gjxxlist': gjxxlist, 'gjlblist': gjlblist})
+
+def gjxx(request, gjlb):
+    gjxxlist = ''
+    # gjlblist = Gjlb.objects.all()
+    result = {}
+    if gjlb:
+        if int(gjlb) == 0:
+            gjlx = Gjlb.objects.all().order_by('-id').reverse()[0]
+            gjxxlist = Gjxx.objects.filter(gjlb=gjlx)
+        else:
+            gjlx = Gjlb.objects.get(id=int(gjlb))
+            if gjlx:
+                gjxxlist = Gjxx.objects.filter(gjlb=gjlx)
+        response_data = {}
+        try:
+            response_data = serializers.serialize('json', gjxxlist)
+        except:
+            response_data
+
+        # print(response_data)
+        return HttpResponse(response_data, content_type="application/json")

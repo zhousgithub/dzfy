@@ -25,7 +25,7 @@ SECRET_KEY = 'h9mp^(smydb_#9w4w5lv=j@r%xq9h0na8lv3lfw55pblhx!ix#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', '192.168.0.104']
 
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'ajxx',
     'zxgk',
     'dsrxx',
+    'splc',
 ]
 
 MIDDLEWARE = [
@@ -175,8 +176,10 @@ LOGGING = {
     }
 }
 
-MEDIA_ROOT = (
-
-    os.path.join(BASE_DIR, "static/ueditor/image"),
-)
+# MEDIA_ROOT = (
+#
+#     os.path.join(BASE_DIR, "static/image"),
+# )
+MEDIA_ROOT = os.path.join(BASE_DIR, "static/upload/")
+MEDIA_URL = '/static/upload/'
 

@@ -1,22 +1,29 @@
 import uuid
 
-import math
-from django.forms import models
+from django.core import serializers
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 
 # Create your views here.
+from ajxx.models import Ajlx
 from cpws.Forms import CpwsForm
 from cpws.models import Cpws
+from utils import PageUtil
 
 
 def index(request):
 
-    wslist = Cpws.objects.filter(wslb=1)[:5]
+    ajlxlist = Ajlx.objects.all()
+
+    # request.session['ajlxlist'] = JsonUtil.class_to_dict(ajlxlist)
+
+    # print(request.session.get("ajlxlist"))
+
+    wslist = Cpws.objects.filter(ajxx__ajlx=ajlxlist[0])[:5]
 
     hotlist = Cpws.objects.order_by('-djl')[:7]
 
-    return render(request, 'cpws/index.html', {'wslist': wslist, 'hostlist': hotlist})
+    return render(request, 'cpws/index.html', {'wslist': wslist, 'hostlist': hotlist, 'ajlxlist': ajlxlist, 'i': 0})
 
 def edit(request):
 
@@ -26,58 +33,40 @@ def edit(request):
             bt = cf.cleaned_data['bt']
             fbr = cf.cleaned_data['fbr']
             fymc = cf.cleaned_data['fymc']
-            wslb = cf.cleaned_data['wslb']
+            lx = cf.cleaned_data['lx']
             nr = cf.cleaned_data['nr']
             cid = str(uuid.uuid4()).replace('-', '')
-            cpws = Cpws(cid=cid, bt=bt, fymc=fymc, fbr=fbr, wslb=wslb, nr=nr)
+            cpws = Cpws(cid=cid, bt=bt, fymc=fymc, fbr=fbr, lx=lx, nr=nr)
             cpws.save()
             return HttpResponseRedirect('index.html')
     form = CpwsForm
     return render(request, 'cpws/edit.html', {'form': form})
 
-def show(request, cid):
+def show(request, lx, cid):
     if cid:
-        cpws = Cpws.objects.get(cid=cid)
+        ajlxlist = Ajlx.objects.all()
+        ajlx = get_object_or_404(Ajlx, id=lx)
+        cpws = get_object_or_404(Cpws, cid=cid)
         c = cpws
         c.djl = cpws.djl + 1
         c.save()
-        return render(request, 'cpws/details.html', {'cpws': cpws})
-    pass
+        return render(request, 'cpws/details.html', {'cpws': cpws, 'ajlxlist': ajlxlist, 'ajlx': ajlx})
 
-def list(request, wslb, page):
-    if wslb:
+def list(request, lx, page):
+    ajlxlist = Ajlx.objects.all()
+    if lx:
         limit = 3
-        if page:
-            page = int(page)
-            if page <= 0:
-                page = 1
-        else:
-            page = 1
-        
-        totalCount = Cpws.objects.filter(wslb=wslb).count()
-        totalPage = math.ceil(totalCount * 1.0 / limit)
-        if page >= totalPage:
-            page = totalPage
-        if totalPage <= 5:
-            beginIndex = 1
-            endIndex = totalPage
-        else:
-            beginIndex = page - 2
-            endIndex = page + 2
-            if beginIndex < 1:
-                beginIndex = 1
-                endIndex = 5
-            if endIndex > totalPage:
-                beginIndex = totalPage - 5 + 1;
-                endIndex = totalPage
-                
-            
-        indexList = ''
-        for i in range(beginIndex, endIndex+1):
-            indexList = indexList + str(i)
+        ajlx = get_object_or_404(Ajlx, id=lx)
+        totalCount = Cpws.objects.filter(ajxx__ajlx=lx).count()
+        pageInfo = PageUtil.getPage(page, limit, totalCount)
 
-        list = Cpws.objects.filter(wslb=wslb)[(page-1)*limit:page*limit]
-        return render(request, 'cpws/list.html', {'list': list, 'ajlx': wslb, 'indexList': indexList, 'totalPage': totalPage, 'page': page})
+        list = Cpws.objects.filter(ajxx__ajlx=lx)[(pageInfo.get('page')-1)*pageInfo.get('limit'):pageInfo.get('page')*pageInfo.get('limit')]
+        return render(request, 'cpws/list.html', {'list': list, 'pageInfo': pageInfo, 'ajlxlist': ajlxlist, 'ajlx': ajlx})
     pass
 
-# def getpage()
+def byAjlx(request, lx):
+    if lx:
+        wslist = Cpws.objects.filter(ajxx__ajlx=lx)[:5]
+        wslist = serializers.serialize('json', wslist)
+        print(wslist)
+        return HttpResponse(wslist, content_type="application/json")

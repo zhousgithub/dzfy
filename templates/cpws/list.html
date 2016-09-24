@@ -18,12 +18,12 @@
 
 		<div class="document">
 			<div class="document-type clearfix">
-				<h3 class="type-title"><em>民事案件&nbsp;|</em>JUDGMENT DOCUMENT</h3>
+				<h3 class="type-title"><em>{{ ajlx.lx }}&nbsp;|</em>JUDGMENT DOCUMENT</h3>
 				<P class="more">
 					当前位置：
 					<a href="javascript:;">首页</a>
 					&gt;&gt;
-					<a href="javascript:;">民事案件</a>
+					<a href="javascript:;">{{ ajlx.lx }}</a>
 				</P>
 			</div>
 			<table class="document-list">
@@ -39,7 +39,7 @@
                     {% for foo in list %}
 					<tr>
 						<td>{{ foo.fymc }}</td>
-						<td><a href="details.html">{{ foo.bt }}</a></td>
+						<td><a href="{% url 'ws.show' ajlx.id foo.cid %}">{{ foo.bt }}</a></td>
 						<td>（2014）达中刑执字第1310号</td>
 						<td>{{ foo.fbsj|date:'Y-m-d H:i:s' }}</td>
 					</tr>
@@ -47,11 +47,11 @@
 				</tbody>
 			</table>
 			<div class="page clearfix">
-				<a href="javascript:goPage({{ page }}-1, {{ ajlx }});" class="prev">&lt;上一页</a>
-                {% for p in indexList %}
-                    <a href="javascript:goPage({{ p }}, {{ ajlx }});" class="active">{{ p }}</a>
+				<a href="{% url 'ws.list' ajlx.id 1 %}" class="prev">&lt;首页</a>
+                {% for p in pageInfo.indexList %}
+                    <a href="{% url 'ws.list' ajlx.id pageInfo.page|add:'0' %}" {% ifequal pageInfo.page|add:'0' p|add:'0' %} class="active" {% endifequal %}>{{ p }}</a>
                 {% endfor %}
-				<a href="javascript:goPage({{ page }}+1, {{ ajlx }});" class="next">下一页&gt;</a>
+				<a href="{% url 'ws.list' ajlx.id pageInfo.totalPage|add:'0' %}" class="next">尾页&gt;</a>
 			</div>
 		</div>
 
@@ -64,11 +64,6 @@
 	
 	<script src="/static/cpws/js/jquery-1.11.2.min.js"></script>
 	<script src="/static/cpws/js/laydate/laydate.js"></script>
-    <script>
-        function goPage(page, ajlx) {
-            window.location.href='/cpws/ajlx_'+ajlx+'/'+page+'.html'
-        }
-    </script>
 	<script>
 		// 侧滑导航
 		var isMainNav = 0;

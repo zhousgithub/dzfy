@@ -1,0 +1,142 @@
+{% extends 'splc/base.html' %}
+{% block content %}
+<link rel="stylesheet" href="../../static/splc/css/jquery.fullPage.css">
+
+	<div id="section-group">
+
+		<div class="section section1">
+			<div class="document-search-bar">
+				<form class="mainBox clearfix" action="">{% csrf_token %}
+					<p class="title">案件审判进度查询</p>
+					<p class="court"><input type="text" placeholder="法院名称" name="fymc"></p>
+					<p class="anhao"><input type="text" placeholder="案号" name="ah"></p>
+					<p class="password"><input type="password" placeholder="查询密码" name="cxmm"></p>
+					<p class="search-btn"><input type="button" value="查询"></p>
+					<p class="reset-btn"><input type="reset" value="清空"></p>
+				</form>
+			</div>
+		</div>
+
+		<div class="section section2">
+			<div class="notice">
+				<h2 class="section-title">开庭公告</h2>
+				<p class="section-title-en">NOTICE OF SESSION CASE</p>
+				<table class="notice-list">
+					<thead>
+						<tr>
+							<th>开庭日期</th>
+							<th>案号</th>
+							<th>案由</th>
+							<th>承办人</th>
+							<th>承办法庭</th>
+							<th>原告/上诉人</th>
+						</tr>
+					</thead>
+					<tbody>
+                        {% for foo in ajxxlist %}
+                        <tr>
+							<td>{{ foo.ktsj|date:'Y-m-d' }}</td>
+							<td>{{ foo.ah }}</td>
+                            <td>{% autoescape off %}{{ foo.zxay }}{% endautoescape %}</td>
+                            <td>{% autoescape off %}{{ foo.fgxx }}{% endautoescape %}</td>
+                            <td>{% autoescape off %}{{ foo.cbft }}{% endautoescape %}</td>
+							<td>
+                                原告：{% for fo in foo.dsrxx_set.all %}
+                                {% ifequal fo.dsrlx '原告' %}{{ fo.dsrxm }}{% if not forloop.last %},{% endif %}{% endifequal %}
+                                {% endfor %}
+                                被告：{% for fo in foo.dsrxx_set.all %}
+                                {% ifequal fo.dsrlx '被告' %}{{ fo.dsrxm }}{% if not forloop.last %},{% endif %}{% endifequal %}
+                                {% endfor %}
+                            </td>
+						</tr>
+                        {% endfor %}
+
+
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="section section3">
+			<h2 class="section-title">数说审判</h2>
+			<p class="section-title-en">JUDGE BASED IN DATA</p>
+			<div class="dataChart">
+				<div id="chart1"></div>
+			</div>
+		</div>
+		
+		<div class="section section4">
+			<h2 class="section-title">数说审判</h2>
+			<p class="section-title-en">JUDGE BASED IN DATA</p>
+			<div class="dataChart">
+				<div id="chart2"></div>
+				<div id="chart3"></div>
+			</div>
+		</div>
+
+		<div class="section section5">
+			<h2 class="section-title">诉讼指南</h2>
+			<p class="section-title-en">GUIDENCE FOR LAWSUIT</p>
+			<ul class="guide-list mainBox clearfix">
+				<li class="guide-item"><a href="/zxgk/gjml/0.html" class="title"><i class="icon iconfont">&#xe604;</i>法官名册信息</a></li>
+				<li class="guide-item"><a href="{% url 'views.znList' 5 1%}" class="title"><i class="icon iconfont">&#xe60e;</i>窗口办事指南</a></li>
+				<li class="guide-item"><a href="{% url 'views.znList' 6 1%}" class="title"><i class="icon iconfont">&#xe60b;</i>诉讼费用缴纳办法</a></li>
+				<li class="guide-item"><a href="{% url 'views.znList' 7 1%}" class="title"><i class="icon iconfont">&#xe671;</i>执行案件流程</a></li>
+				<li class="guide-item"><a href="{% url 'views.znList' 8 1%}" class="title"><i class="icon iconfont">&#xe658;</i>执行案件申诉须知</a></li>
+				<li class="guide-item"><a href="{% url 'views.znList' 9 1%}" class="title"><i class="icon iconfont">&#xe623;</i>民事案件起诉须知</a></li>
+				<li class="guide-item"><a href="{% url 'views.znList' 10 1%}" class="title"><i class="icon iconfont">&#xe636;</i>民事诉讼风险提示书</a></li>
+				<li class="guide-item"><a href="{% url 'views.znList' 11 1%}" class="title"><i class="icon iconfont">&#xe617;</i>常用诉讼文书格式</a></li>
+			</ul>
+			<div class="copyRight">
+				<p class="right">注册单位：达州市中级人民法院  技术支持：深圳市千合科技有限公司 </p>
+				<p>蜀ICP备14002101号</p>
+			</div>
+		</div>
+		
+	</div>
+
+	<script src="../../static/splc/js/jquery-1.11.2.min.js"></script>
+	<script src="../../static/splc/js/jquery.fullPage.min.js"></script>
+	<script src="../../static/splc/js/laydate/laydate.js"></script>
+	<script src="../../static/splc/js/echarts.js"></script>
+	<script src="../../static/splc/js/chart.js"></script>
+	<script>
+		// 全屏滚动
+		$(function(){
+			$('#section-group').fullpage({
+				'navigation': true,
+			});
+		});
+
+		// 侧滑导航
+		var isMainNav = 0;
+ 		$(".slide-nav-btn").click(function(){
+ 			if(isMainNav == 0){
+ 				$(".slide-nav").addClass('slide-nav-active');
+ 				$(".section,.header").addClass('nav-active');
+ 				isMainNav = 1;
+ 			}else{
+ 				$(".slide-nav").removeClass('slide-nav-active');
+ 				$(".section,.header").removeClass('nav-active');
+ 				isMainNav = 0;
+ 			}
+		});
+
+		// 文书选项卡
+		$(".type-item").click(function(){
+			$(this).addClass("active").siblings().removeClass("active");
+		});
+
+		$(function(){
+			$(window).scroll(function(){
+				if( $(window).scrollTop() >0 ){
+					$(".header").addClass('shadow');
+				}else{
+					$(".header").removeClass('shadow');
+				}
+			});	
+		});
+
+	</script>
+{% endblock %}

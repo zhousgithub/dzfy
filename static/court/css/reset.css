@@ -1,0 +1,36 @@
+*{
+	margin:0;
+	padding:0;
+}
+body{
+	font-size:14px;
+	font:14/1.8 "Microsoft Yahei","simsun";
+}
+h1,h2,h3,h4,h5,h6{
+	font-size:100%;
+	font-weight:normal;
+}
+img,input{
+	border:none;
+	outline:none;
+}
+em,strong{
+	font-weight:normal;
+	font-style:normal;
+}
+a{
+	text-decoration:none;
+	color:inherit;
+}
+ul,ol,li{
+	list-style-type:none;
+}
+table,td,tr,th{
+	border-spacing:0;
+	border-collapse:collapse;
+}
+
+/**============ 清除浮动 =============**/
+.clearfix{*zoom:1;}
+.clearfix:before,.clearfix:after{display:table;content:"";line-height:0;}
+.clearfix:after{clear:both;}

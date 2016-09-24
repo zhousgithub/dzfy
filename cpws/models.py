@@ -8,7 +8,7 @@ from ajxx.models import Ajxx
 
 class Cpws(models.Model):
 
-    cid = models.CharField(max_length=100, verbose_name='cid', default=str(uuid.uuid4()).replace('-', ''), editable=False)
+    cid = models.UUIDField(max_length=100, default=uuid.uuid1, editable=False)
     fymc = models.CharField(max_length=50, verbose_name='法院名称')
     bt = models.CharField(max_length=200, verbose_name='标题')
     fbr = models.CharField(max_length=10, verbose_name='发布人')

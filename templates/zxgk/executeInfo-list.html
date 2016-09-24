@@ -55,11 +55,11 @@
 				</tbody>
 			</table>
 			<div class="page clearfix">
-				<a href="javascript:goPage({{ pageInfor.page }}-1);" class="prev">&lt;上一页</a>
+				<a href="{% url 'zxgk.zxgk' 1 %}" class="prev">&lt;首页</a>
                 {% for p in pageInfor.indexList %}
-                    <a href="javascript:goPage({{ p }});" class="active">{{ p }}</a>
+                    <a href="{% url 'zxgk.zxgk' p %}" {% ifequal pageInfor.page|add:'0' p|add:'0' %} class="active" {% endifequal %}>{{ p }}</a>
                 {% endfor %}
-				<a href="javascript:goPage({{ pageInfor.page }}+1);" class="next">下一页&gt;</a>
+				<a href="{% url 'zxgk.zxgk' pageInfor.totalPage %}" class="next">尾页&gt;</a>
 			</div>
 		</div>
 
@@ -117,40 +117,6 @@
                     }
             });
         }
-
-        function goPage(page) {
-
-            window.location.href = "/zxgk/zxgk/" + page + ".html";
-
-{#            $.ajax({#}
-{#                type: "POST",#}
-{#                url: "/zxgk/zxgk/" + page + ".html",#}
-{#                data: "",#}
-{#                success: function (data) {#}
-{#                    ajxx = JSON.stringify(data)#}
-{#                    alert(ajxx);#}
-{#                    $(".wrap").addClass('blur');#}
-{#                    layer.open({#}
-{#                        type: 2,#}
-{#                        title: ["执行信息公开" + " - " + ah],#}
-{#                        closeBtn: 2,#}
-{#                        shade: [0.7, '#000000'],#}
-{#                        area: ['600px', '680px'],#}
-{#                        shadeClose: true,#}
-{#                        skin: 'yourclass',#}
-{#                        content: ['executeInfo-details.html', 'no'],#}
-{#                        end: function () {#}
-{#                            $(".wrap").removeClass('blur');#}
-{#                        }#}
-{#                    });#}
-{#                },#}
-{#                error: function (errorInfo) {#}
-{#                    alert('errorInfo='+errorInfo)#}
-{#                }#}
-{#            });#}
-        }
-
-
 
 	</script>
 {% endblock %}

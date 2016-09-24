@@ -20,13 +20,16 @@
 				</a>
 			</h1>
 
-			<ul class="nav-group">
-				<li class="nav-item"><a href="/cpws/index.html" class="active">首页</a></li>
-				<li class="nav-item"><a href="/cpws/ajlx_1/1.html">民事案件</a></li>
-				<li class="nav-item"><a href="/cpws/ajlx_2/1.html">刑事案件</a></li>
-				<li class="nav-item"><a href="/cpws/ajlx_3/1.html">行政案件</a></li>
-				<li class="nav-item"><a href="/cpws/ajlx_4/1.html">执行案件</a></li>
-				<li class="nav-item"><a href="/cpws/ajlx_5/1.html">赔偿案件</a></li>
+            <ul class="nav-group">
+                <li class="nav-item"><a href="/cpws/index.html" {% ifequal i|add:'0' 0 %} class="active"{% endifequal %}>首页</a></li>
+                {% for foo in ajlxlist %}
+				<li class="nav-item"><a href="{% url 'ws.list' foo.id 1 %}"  {% ifequal forloop.counter|add:'0' ajlx.id|add:'0' %} class="active"{% endifequal %}>{{ foo.lx }}</a></li>
+                {% endfor %}
+{#				<li class="nav-item"><a href="/cpws/ajlx_1/1.html">民事案件</a></li>#}
+{#				<li class="nav-item"><a href="/cpws/ajlx_2/1.html">刑事案件</a></li>#}
+{#				<li class="nav-item"><a href="/cpws/ajlx_3/1.html">行政案件</a></li>#}
+{#				<li class="nav-item"><a href="/cpws/ajlx_4/1.html">执行案件</a></li>#}
+{#				<li class="nav-item"><a href="/cpws/ajlx_5/1.html">赔偿案件</a></li>#}
 			</ul>
 
 			<a href="javascript:;" class="main-nav-btn">
@@ -37,10 +40,10 @@
 
 	<div class="slide-nav">
 		<ul class="slide-nav-group">
-			<li class="slide-nav-item"><a href="javascript:;">网站首页</a></li>
-			<li class="slide-nav-item"><a href="javascript:;">审判流程</a></li>
-			<li class="slide-nav-item"><a href="javascript:;">执行信息</a></li>
-			<li class="slide-nav-item"><a href="javascript:;">裁判文书</a></li>
+			<li class="slide-nav-item"><a href="/index.html">网站首页</a></li>
+			<li class="slide-nav-item"><a href="/splc/index.html">审判流程</a></li>
+			<li class="slide-nav-item"><a href="/zxgk/index.html">执行信息</a></li>
+			<li class="slide-nav-item"><a href="/cpws/index.html">裁判文书</a></li>
 			<li class="slide-nav-item"><a href="javascript:;">网上立案</a></li>
 			<li class="slide-nav-item"><a href="javascript:;">网上执行局</a></li>
 			<li class="slide-nav-item"><a href="javascript:;">政务网站</a></li>

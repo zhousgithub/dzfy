@@ -1,0 +1,136 @@
+{% extends 'splc/base.html' %}
+{% block content %}
+	<div class="wrap">
+		<div class="banner">
+			<img src="../../static/splc/images/caseSearch-bg.jpg" alt="">
+			<div class="search-box">
+				<table>
+<!-- 					<thead>
+						<tr>
+							<th colspan="2">当事人登陆</th>
+						</tr>
+					</thead> -->
+					<tbody>
+						<tr>
+							<td class="title">法院名称：</td>
+							<td class="keyWords">
+								<select name="fymc" id="fymc" class="fymc" >
+									<option selected="selected" value="达州市中级人民法院">达州市中级人民法院</option>
+									<option value="达州市通川区人民法院">达州市通川区人民法院</option>
+									<option value="万源市人民法院">万源市人民法院</option>
+									<option value="达州市达川区人民法院">达州市达川区人民法院</option>
+									<option value="宣汉县人民法院">宣汉县人民法院</option>
+									<option value="开江县人民法院">开江县人民法院</option>
+									<option value="大竹县人民法院">大竹县人民法院</option>
+									<option value="渠县人民法院">渠县人民法院</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td class="title">案号：</td>
+							<td class="keyWords">
+								<select name="nd" id="nd" class="nd">
+									<option value="2016" selected="selected">2016</option>
+									<option value="2015">2015</option>
+									<option value="2014">2014</option>
+									<option value="2013">2013</option>
+									<option value="2012">2012</option>
+									<option value="2011">2011</option>
+									<option value="2010">2010</option>
+									<option value="2009">2009</option>
+									<option value="2008">2008</option>
+									<option value="2007">2007</option>
+									<option value="2006">2006</option>
+								</select>
+								<select name="jc" id="jc" class="jc">
+									<option value="达中" selected="selected">达中</option>
+									<option value="通川">通川</option>
+									<option value="万源">万源</option>
+									<option value="达达">达达</option>
+									<option value="宣汉">宣汉</option>
+									<option value="开江">开江</option>
+									<option value="大竹">大竹</option>
+									<option value="达渠">达渠</option>
+								</select>
+								<select name="az" id="az" class="az">
+									<option value="民一初" selected="selected">民一初</option>
+									<option value="民二初">民二初</option>
+									<option value="民三初">民三初</option>
+									<option value="民初">民初</option>
+									<option value="民终">民终</option>
+									<option value="民二终">民二终</option>
+									<option value="民三终">民三终</option>
+									<option value="民三终">民三终</option>
+									<option value="刑初">刑初</option>
+									<option value="刑终">刑终</option>
+									<option value="刑一终">刑一终</option>
+									<option value="刑二终">刑二终</option>
+									<option value="行初">行初</option>
+									<option value="行终">行终</option>
+									<option value="行一初">行一初</option>
+									<option value="行二初">行二初</option>
+									<option value="执">执</option>
+								</select>
+								字第
+								<input name="ah" type="text" maxlength="20" id="ah" class="ah">
+								号
+							</td>
+						</tr>
+						<tr>
+							<td class="title">查询密码：</td>
+							<td class="keyWords">
+								<input name="cxPwd" type="password" maxlength="20" id="cxPwd" class="cxPwd">
+							</td>
+						</tr>
+						<tr>
+							<td class="title">验证码：</td>
+							<td class="keyWords" style="vertical-align:middle">
+								<input name="Vis_Txt" type="text" id="Vis_Txt" class="Vis_Txt">
+								<img class="vis-img" src="../../static/splc/images/getCode.jpg" alt="">
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<input class="search-btn" type="button" value="查    询"></input>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="copyRight">
+			<p class="right">注册单位：达州市中级人民法院  技术支持：深圳市千合科技有限公司 </p>
+			<p>蜀ICP备14002101号</p>
+		</div>
+
+	</div>
+	
+	<script src="../../static/splc/js/jquery-1.11.2.min.js"></script>
+	<script src="../../static/splc/js/laydate/laydate.js"></script>
+	<script>
+		// 侧滑导航
+		var isMainNav = 0;
+ 		$(".slide-nav-btn").click(function(){
+ 			if(isMainNav == 0){
+ 				$(".slide-nav").addClass('slide-nav-active');
+ 				$(".wrap,.header").addClass('nav-active');
+ 				isMainNav = 1;
+ 			}else{
+ 				$(".slide-nav").removeClass('slide-nav-active');
+ 				$(".wrap,.header").removeClass('nav-active');
+ 				isMainNav = 0;
+ 			}
+		});
+
+		$(function(){
+			$(window).scroll(function(){
+				if( $(window).scrollTop() >0 ){
+					$(".header").addClass('shadow');
+				}else{
+					$(".header").removeClass('shadow');
+				}
+			});	
+		});
+	</script>
+{% endblock %}
